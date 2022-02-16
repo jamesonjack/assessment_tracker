@@ -2,12 +2,18 @@
     require('model/database.php');
     require('model/assignment_db.php');
     require('model/course_db.php');
+    if(!isset($_SESSION['U_ID'])){
+
+        header('location: login.php'); } 
+        
+        
+    
 
     $assignment_id = filter_input(INPUT_POST, 'assignment_id', FILTER_VALIDATE_INT);
     $description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_STRING);
     $due_date = filter_input(INPUT_POST, 'due_date', FILTER_SANITIZE_STRING);
     $course_name = filter_input(INPUT_POST, 'course_name', FILTER_SANITIZE_STRING);
-
+    $userID = filter_input(INPUT_POST, 'userID', FILTER_VALIDATE_INT);
     $course_id = filter_input(INPUT_POST, 'course_id', FILTER_VALIDATE_INT);
     if (!$course_id) {
         $course_id = filter_input(INPUT_GET, 'course_id', FILTER_VALIDATE_INT);
@@ -28,12 +34,12 @@
             include('view/course_list.php');
             break;
         case "add_course":
-            add_course($course_name);
+            add_course($course_name, $userID);
             header("Location: .?action=list_courses");
             break;
         case "add_assignment":
-            if ($course_id && $description && $due_date) {
-                add_assignment($course_id, $description, $due_date);
+            if ($course_id && $description && $due_date && $userID) {
+                add_assignment($course_id, $description, $due_date, $userID);
                 header("Location: .?course_id=$course_id");
             } else {
                 $error = "Invalid assignment data. Check all fields and try again.";
@@ -77,7 +83,6 @@
             $courses = get_courses();
      
             $assignments = get_assignments_by_course($course_id);
-            include('view/assignment_list.php');
-    }
+            include('view/assignment_list.php');}
 
     

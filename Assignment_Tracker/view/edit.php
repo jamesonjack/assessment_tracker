@@ -4,12 +4,9 @@
 <section id="edit" class="edit">
     <h2>edit Assignment</h2>
     <br>
-    <form action="." method="post" id="edit__form" class="edit__form">
-        <input type="hidden" name="action" value="edit_assignment">
+    <form action="editpost.php" method="post" id="edit__form" class="edit__form">
         <div class="edit__inputs">
-            <label>course:</label>
-            </select>
-            <label>Description:</label>
+      
 <?php 
 
 // function for individual product data 
@@ -41,16 +38,15 @@ function editassign($assignment_id, $description, $due_date){
 
          
 $assign = getassignDetails($assignment_id);  ?> 
+    <input type="hidden" name="ID" id="ID" value="<?php echo $assignment_id ?>"/>
+    <input type="text" name="description" id="description"  maxlength="120" value ="<?php echo $assign['Description']; ?>" placeholder="Description" required>
 
-    <input type="hidden" name="ID" value="<?php echo $assignment_id ?>"/>
-    <input type="text" name="description"  maxlength="120" value ="<?php echo $assign['Description']; ?>" placeholder="Description" required>
-    <label>Due Date:</label>
-            <input type="date" value="<?php echo $assign['due_date']  ?>" name="due_date" required>
+            <input type="date" id="duedate" value="<?php echo $assign['due_date']  ?>" name="due_date" required>
         </div>
 
     
         <div class="edit__editItem">
-            <button class="edit-button bold">edit</button>
+            <button type="submit" name="editassign" class="edit-button bold">edit</button>
         </div>
     </form>
 </section>

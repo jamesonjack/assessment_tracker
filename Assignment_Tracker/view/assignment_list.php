@@ -26,14 +26,12 @@
     <?php foreach ($assignments as $assignment) : ?>
     <div class="list__row">
         <div class="list__item">
-            <p class="bold"><?= "{$assignment['courseName']}" ?></p>
             <p><?= $assignment['Description']; ?></p>
             <p><?= $assignment['due_date']; ?></p>
         </div>
         <div class="list__editItem">
         <form action="." method="post">
                 <input type="hidden" name="action" value="edit_assignment">
-                <input type="hidden" name="assignment_id" value="<?= $assignment['courseName']; ?>">
                 <input type="hidden" name="assignment_id" value="<?= $assignment['ID']; ?>">
                 <button style='font-size:24px' class="edit-button"><i class='fas fa-edit'></i></button>
             </form>
@@ -73,6 +71,7 @@
                 </option>
                 <?php endforeach; ?>
             </select>
+            <input type="hidden" name="userID" value="<?php echo $_SESSION['U_ID'] ?> ">
             <label>Description:</label>
             <input type="text" name="description" maxlength="120" placeholder="Description" required>
             <label>Due Date:</label>

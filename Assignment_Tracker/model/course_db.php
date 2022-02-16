@@ -2,7 +2,7 @@
 
     function get_courses() {
         global $db;
-        $query = 'SELECT * FROM courses ORDER BY courseID';
+        $query = 'SELECT * FROM courses  WHERE userID = '. $_SESSION["U_ID"] .' ORDER BY courseID';
         $statement = $db->prepare($query);
         $statement->execute();
         $courses = $statement->fetchAll();
@@ -15,7 +15,7 @@
             return "All Courses";
         }
         global $db;
-        $query = 'SELECT * FROM courses WHERE courseID = :course_id';
+        $query = 'SELECT * FROM courses WHERE courseID = :course_id AND userID = '. $_SESSION["U_ID"] .'' ;
         $statement = $db->prepare($query);
         $statement->bindValue(':course_id', $course_id);
         $statement->execute();
@@ -34,13 +34,14 @@
         $statement->closeCursor();
     }
 
-    function add_course($course_name) {
+    function add_course($course_name, $userID) {
         global $db;
-        $query = 'INSERT INTO courses (courseName)
+        $query = 'INSERT INTO courses (courseName, userID)
               VALUES
-                 (:courseName)';
+                 (:courseName, :userID)';
         $statement = $db->prepare($query);
         $statement->bindValue(':courseName', $course_name);
+        $statement->bindValue(':userID', $userID);
         $statement->execute();
         $statement->closeCursor();
     }

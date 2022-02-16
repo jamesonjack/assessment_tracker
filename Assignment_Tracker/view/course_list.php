@@ -33,6 +33,7 @@
     <form action="." method="post" id="add__form" class="add__form">
         <input type="hidden" name="action" value="add_course">
         <div class="add__inputs">
+        <input type="hidden" name="userID" value="<?php echo $_SESSION['U_ID'] ?> ">
             <label>Name:</label>
             <input type="text" name="course_name" maxlength="30" placeholder="Name" autofocus required>
         </div>

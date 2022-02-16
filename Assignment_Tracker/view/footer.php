@@ -1,5 +1,7 @@
 <br>
-<a href="login.php"><button>Log out</button></a>
+<form style="display: inline" action="model/logout.php" method="get">
+  <button>Log Out</button>
+</form>
 </main>
 <br>
 <style>
@@ -12,7 +14,8 @@
   font-size: 12px;
 }
 </style>
-<footer class="footer">Jack Jameson 2022</footer>
+
+<footer class="footer">Jack Jameson 2022 </footer>
 </body>
 
 </html>
